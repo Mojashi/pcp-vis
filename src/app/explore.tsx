@@ -50,8 +50,8 @@ export function _PCPExplore({pcp}: Props) {
             </ListGroup>    
             
         </Sidebar>
-        <div style={{ width: '100vw', flexGrow:"1"}}>
-            <Button onClick={()=>setCollapsed(b=>!b)}>{">"}</Button>
+        <div style={{width: '100vw', flexGrow:"1"}}>
+            <Button className="absolute" onClick={()=>setCollapsed(b=>!b)}>{">"}</Button>
             <PCPTreeView pcpTree={tree} onClickNode={expandNode}></PCPTreeView>
         </div>
     </div>
