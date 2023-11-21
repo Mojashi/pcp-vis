@@ -1,3 +1,5 @@
+import { off } from "process"
+
 export type Tile = {
     up: string
     dn: string
@@ -32,19 +34,23 @@ export function bfs(pcp: PCP, depth: number, config: PCPConfig = {dir:"UP", conf
 }
 
 export function applyTile(config: PCPConfig, tile: Tile): PCPConfig | undefined {
-    if ((config.config + tile.up).startsWith(tile.dn)) {
+    var newUp = config.dir === "UP" ? config.config + tile.up : tile.up
+    var newDn = config.dir === "DN" ? config.config + tile.dn : tile.dn
+    if (newUp.startsWith(newDn)) {
         return {
             dir: "UP",
-            config: (config.config + tile.up).slice(tile.dn.length)
+            config: newUp.slice(newDn.length)
         }
     }
-    if ((config.config + tile.dn).startsWith(tile.up)) {
+    else if (newDn.startsWith(newUp)) {
         return {
             dir: "DN",
-            config: (config.config + tile.dn).slice(tile.up.length)
+            config: newDn.slice(newUp.length)
         }
     }
-    return undefined
+    else {
+        return undefined
+    }
 }
 
 export function flattenTree(tree: PCPTree): PCPConfig[] {
