@@ -8,7 +8,7 @@ interface Props {
 }
 
 export function _PCPExplore({pcp}: Props) {
-    const [tree, setTree] = useState(bfs(pcp, 4))
+    const [tree, setTree] = useState(bfs(pcp, 3))
     const configs = useMemo(() => flattenTree(tree), [tree])
     function expandNode(path: number[]) {
         setTree(tree => produce(tree, draft => {
