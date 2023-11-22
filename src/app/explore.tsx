@@ -47,8 +47,7 @@ export function _PCPExplore({pcp}: Props) {
                 {configs.filter(a => a.dir === "DN").map((a, idx) => 
                 <ListGroup.Item key={idx}>{a.config}</ListGroup.Item>
                 )}
-            </ListGroup>    
-            
+            </ListGroup>
         </Sidebar>
         <div style={{width: '100vw', flexGrow:"1"}}>
             <Button className="absolute" onClick={()=>setCollapsed(b=>!b)}>{">"}</Button>
