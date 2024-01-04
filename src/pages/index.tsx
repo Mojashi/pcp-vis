@@ -3,7 +3,7 @@ import { PCPInput } from "../app/comp/pcpinput";
 import { PCP } from "../app/model/pcp";
 import { useRouter } from "next/router";
 import Head from "next/head";
-import RootLayout from "@/app/layout";
+import { PCPInputFromScala } from "@/app/comp/pcpinputFromScala";
 
 export default function InitialPage() {
     const router = useRouter();
@@ -22,8 +22,17 @@ export default function InitialPage() {
         <link rel="stylesheet" href="https://rsms.me/inter/inter.css"/>
       </Head>
 
+      <h1>PCP Explorer</h1> 
+      <p>入力形式1</p>
       <PCPInput onChange={setPCP} pcp={pcp}></PCPInput>
-      alphabets: {alphabets}
       <button onClick={done}>OK</button>
+      <div style={{margin:"1em"}}></div>
+
+      <p>入力形式2 (scalaの出力からコピペするならこっち)</p>
+      <PCPInputFromScala onDone={(pcp) => {
+        setPCP(pcp)
+        done()
+      }}></PCPInputFromScala>
+      alphabets: {alphabets}
     </div>
 }
