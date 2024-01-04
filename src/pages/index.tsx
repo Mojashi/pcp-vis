@@ -10,7 +10,7 @@ export default function InitialPage() {
     const [pcp, setPCP] = useState<PCP>([{up:"1111", dn:"110"}, {up:"1110", dn:"1"}, {up:"1", dn:"1111"}])
     const alphabets: Set<string> = useMemo(() => new Set(pcp.flatMap(tile => tile.up + tile.dn).join("")), [pcp])
   
-    function done() {
+    function done(pcp: PCP) {
       router.push("/explore" + "?" + new URLSearchParams(
         pcp.map(tile => ["up", tile.up]).concat(pcp.map(tile => ["dn", tile.dn]))
         )
@@ -25,13 +25,12 @@ export default function InitialPage() {
       <h1>PCP Explorer</h1> 
       <p>入力形式1</p>
       <PCPInput onChange={setPCP} pcp={pcp}></PCPInput>
-      <button onClick={done}>OK</button>
+      <button onClick={()=>done(pcp)}>OK</button>
       <div style={{margin:"1em"}}></div>
 
       <p>入力形式2 (scalaの出力からコピペするならこっち)</p>
       <PCPInputFromScala onDone={(pcp) => {
-        setPCP(pcp)
-        done()
+        done(pcp)
       }}></PCPInputFromScala>
       alphabets: {alphabets}
     </div>
